@@ -121,7 +121,6 @@ make sbom        # Generate CycloneDX Software Bill of Materials (reports/sbom.j
 - [Known Limitations & Operational Boundaries](docs/LIMITATIONS.md)
 - [Evaluation Report & Baseline Comparisons](reports/EVAL.md)
 - [Test Suite Execution Evidence](reports/TESTS.md)
-- [Demonstration Scripts (2-min video & 5-min live demo)](docs/DEMO_SCRIPT.md)
 - [Architecture Decision Records (ADRs)](docs/DECISIONS.md)
 - [Software Attribution & Synthetic Data Notice](docs/ATTRIBUTION.md)
 - [Security Policy](SECURITY.md)
