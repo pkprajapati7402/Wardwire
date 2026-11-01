@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-11-01T15:11:49.125360+00:00",
+  "hardware": {
+    "system": "Windows",
+    "release": "11",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD"
+  },
+  "workload": {
+    "events_evaluated": 5000,
+    "duration_seconds": 0.239
+  },
+  "throughput": {
+    "events_per_second": 20916.5,
+    "target_rps": 1000.0,
+    "meets_target": true
+  },
+  "latency_ms": {
+    "p50": 0.035,
+    "p95": 0.069,
+    "p99": 0.13,
+    "target_p99_max": 50.0,
+    "meets_target": true
+  },
+  "memory_guard": {
+    "max_cardinality_cap": 10000,
+    "keys_after_flood": 10000,
+    "evictions_enforced": 23869,
+    "is_bounded": true
+  }
+}

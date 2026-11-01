@@ -1,0 +1,2 @@
+"""ShopAPI demo target application."""
+

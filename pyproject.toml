@@ -1,0 +1,76 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sentinel"]
+
+[project]
+name = "wardwire"
+version = "1.0.0"
+description = "Real-time API abuse detection and explanation platform"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+    { name = "Wardwire Team", email = "security@wardwire.local" }
+]
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.28.0",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.2.1",
+    "orjson>=3.10.0",
+    "redis>=5.0.3",
+    "sqlalchemy>=2.0.29",
+    "alembic>=1.13.1",
+    "httpx>=0.27.0",
+    "numpy>=1.26.4",
+    "scikit-learn>=1.4.2",
+    "river>=0.21.0",
+    "structlog>=24.1.0",
+    "prometheus-client>=0.20.0",
+    "pyjwt>=2.8.0",
+    "passlib[bcrypt]>=1.7.4",
+    "bcrypt>=4.1.2",
+    "faker>=24.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.1.1",
+    "pytest-asyncio>=0.23.6",
+    "ruff>=0.3.5",
+    "mypy>=1.9.0",
+    "bandit>=1.7.8",
+    "pip-audit>=2.7.2",
+]
+llm = [
+    "litellm>=1.35.0",
+]
+
+[project.scripts]
+sentinel-api = "sentinel.api.main:run_api"
+sentinel-worker = "sentinel.worker.main:run_worker"
+sentinel-target = "sentinel.target.app:run_target"
+sentinel-sim = "sentinel.sim.runner:run_sim"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "S"]
+ignore = ["S101", "S104", "B008", "S311", "S105", "S106", "E501", "B007", "S110"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["src"]

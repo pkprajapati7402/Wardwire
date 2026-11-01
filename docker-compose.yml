@@ -1,0 +1,120 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: wardwire-redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "no", "--save", ""]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wardwire-api
+    command: ["uvicorn", "sentinel.api.main:app", "--host", "0.0.0.0", "--port", "8001"]
+    ports:
+      - "8001:8001"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=sqlite:////app/data/wardwire.db
+      - TARGET_URL=http://target:8000
+      - API_URL=http://api:8001
+    env_file:
+      - .env
+    volumes:
+      - wardwire-data:/app/data
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/healthz')"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wardwire-worker
+    command: ["python", "-m", "sentinel.worker.main"]
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=sqlite:////app/data/wardwire.db
+      - TARGET_URL=http://target:8000
+      - API_URL=http://api:8001
+    env_file:
+      - .env
+    volumes:
+      - wardwire-data:/app/data
+    depends_on:
+      redis:
+        condition: service_healthy
+      api:
+        condition: service_started
+    restart: unless-stopped
+
+  target:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wardwire-target
+    command: ["uvicorn", "sentinel.target.app:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    environment:
+      - API_URL=http://api:8001
+      - INGEST_URL=http://api:8001/v1/events
+    env_file:
+      - .env
+    depends_on:
+      api:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz')"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  sim:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wardwire-sim
+    profiles: ["lab"]
+    command: ["python", "-m", "sentinel.sim.runner", "--mode", "background"]
+    environment:
+      - TARGET_URL=http://target:8000
+      - API_URL=http://api:8001
+    env_file:
+      - .env
+    depends_on:
+      target:
+        condition: service_healthy
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: wardwire-web
+    ports:
+      - "3000:80"
+    depends_on:
+      api:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  wardwire-data:
+
