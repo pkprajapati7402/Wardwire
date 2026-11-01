@@ -28,3 +28,4 @@ No real personal data, proprietary enterprise logs, or external third-party traf
 | **Bandit** | Apache-2.0 | Static Application Security Testing (SAST) |
 | **Pip-Audit** | Apache-2.0 | Dependency Vulnerability Auditing |
 | **CycloneDX-py** | Apache-2.0 | Software Bill of Materials (SBOM) Generation |
+

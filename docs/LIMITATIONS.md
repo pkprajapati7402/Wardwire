@@ -31,3 +31,4 @@ Adversaries operating at **Stealth Level 4** intentionally interleave attacks in
 
 - The BOLA detector (`BolaEnumerationDetector`) excels at discovering monotonic, sequential, or range-based object ID enumeration ($+1, +2$).
 - If an application uses cryptographically random version-4 UUIDs or non-sequential hash identifiers, the sequential step metric is inapplicable; detection then relies on high unique object cardinality and authorization denial ($403/404$) ratios.
+

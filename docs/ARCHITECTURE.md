@@ -51,3 +51,4 @@ All keys are namespaced with `sentinel:` and enforce mandatory TTLs:
 
 - **Database:** SQLite in WAL (Write-Ahead Logging) mode is used by default for zero-configuration, single-command reproducibility. Can be switched to PostgreSQL with zero code changes via `DATABASE_URL`.
 - **Horizontal Worker Scaling:** Workers consume Redis Streams using consumer groups. Partitioning by entity hash ensures all events for a given IP or account flow to a consistent worker bucket without lock contention.
+

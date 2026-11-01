@@ -24,3 +24,4 @@ This document formalizes the threat model for the Wardwire API abuse detection p
 2. **SAST Analysis:** Bandit AST inspection gating security pull requests (`bandit -r src/ -ll`).
 3. **Software Bill of Materials (SBOM):** Standardized CycloneDX JSON SBOM generated during build (`reports/sbom.json`).
 4. **Secret Scanning:** Gitleaks automated repository scanning preventing credential or API key leakage.
+

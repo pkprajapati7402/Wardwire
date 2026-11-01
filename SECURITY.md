@@ -25,3 +25,4 @@ Please do not disclose security issues publicly until a fix has been verified an
 
 4. **Self-Protection & Cardinality Bounds:**
    The sliding window feature extractor enforces strict cardinality ceilings (`CARDINALITY_MAX_KEYS=10000`) with LRU evictions to prevent denial-of-service via high-cardinality IP flooding attacks.
+

@@ -47,3 +47,4 @@ This document provides scripts for the 2-minute video submission and the 5-minut
 
 7. **4:30–5:00 | Technical Q&A:**
    - Refer to Technical Q&A cheat sheet (`Appendix A` in build spec).
+

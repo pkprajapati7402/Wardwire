@@ -34,3 +34,4 @@ Follow Conventional Commits:
 - `fix:` for bug fixes
 - `test:` for test additions
 - `docs:` for documentation updates
+

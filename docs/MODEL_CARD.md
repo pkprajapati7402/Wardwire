@@ -43,3 +43,4 @@ When volume spikes occur, Wardwire avoids false alarms by evaluating 6 explicit 
 - **F1 Score:** **0.927**
 - **False Alarms per Day:** **0.0** (0 false alerts across flash-sale B1 and retry-storm B2 scenarios)
 - **Time to Detect (p50):** **12.0 s**
+

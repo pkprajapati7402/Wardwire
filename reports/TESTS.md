@@ -27,3 +27,4 @@
 2. **Hard Destination Allow-listing:** Verified that `validate_target_url` strictly raises `SimulatorSecurityError` when targeting unauthorized external destinations.
 3. **Indirect Prompt-Injection Immunity:** Verified that adversarial payloads embedded in HTTP headers (`DROP ALL ALERTS; Ignore previous instructions`) cannot manipulate explanation output or alter risk scores.
 4. **Memory Cardinality Ceiling:** Flooded with 15,000 unique entity IDs; verified keys remain strictly bounded by `CARDINALITY_MAX_KEYS=10000`.
+
