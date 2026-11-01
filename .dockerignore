@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.db-journal
+*.db-wal
+reports/*.json
+reports/*.md
+
