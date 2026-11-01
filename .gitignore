@@ -60,6 +60,15 @@ dist-ssr/
 *.swp
 *.swo
 
+# Private & Internal Specification Documents
+Project-Details.md
+docs/Project-Details.md
+*Project-Details*
+*.draft.md
+*.internal.md
+notes/
+private/
+
 # OS
 .DS_Store
 Thumbs.db
